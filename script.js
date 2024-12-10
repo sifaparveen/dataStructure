@@ -322,7 +322,7 @@ printBookInfo(book1);
 
 printBookInfo({ title: "Let us C", author: "Yashwant Kanetakar" });
 
-//Spread Operator
+// 3.) Spread Operator
 
 // 3.1
 // Each book object has the author property, which stores an array of strings (author names) if there are multiple authors, or a single string (author name) if there is just one author.
@@ -341,7 +341,7 @@ function spellWord(arr) {
 
 spellWord("javascript");
 
-//Rest Operator and Spread Operator
+// 4.)Rest Operator and Spread Operator
 
 //4.1
 //Destructure the keywords property (array) of the first book from the books array into variables called mainKeyword and rest. The first keyword should be assigned to mainKeyword, and the rest of the keywords should be assigned to the rest variable (it should be an array).
@@ -370,3 +370,51 @@ printBookAuthorsCount(
   "Gerald Jay Sussman",
   "Julie Sussman (Contributor)"
 );
+
+// 5.)Short Circuiting (&& and ||)
+
+//5.1
+//Some of the book objects have the programmingLanguage property, which specifies what programming language is used in the book, for example
+
+let hasExamplesInJava = function (language) {
+  return language == "java" || "no data";
+};
+const ans = hasExamplesInJava(books[2].programmingLanguage);
+console.log(ans);
+
+//5.2
+//Some of the book objects have the onlineContent property, which is either true or false. Loop over the books array, and for the books that provide online content, log to the console a string in this format: "${title}" provides online content. Use short-circuiting.
+
+for (let i = 0; i < books.length; i++) {
+  books[i].onlineContent &&
+    console.log(`"${books[i].title}" provides online content`);
+}
+
+// 6.)The Nullish Coalescing Operator (??)
+
+//6.1
+//There are objects in the books array that don't have the onlineContent property at all. Loop over the books array, and log a string to the console in this format: "${title}" provides no data about its online content.
+
+for (let i = 0; i < books.length; i++) {
+  books[i].onlineContent ??
+    console.log(
+      `"${books[i].title}" provides no data about its online content`
+    );
+}
+
+// 7.)Logical Assignments Operators
+//7.1
+//Some of the book objects from the books array are missing the edition property. Loop over the books array, and assign this property with a number 1 (if it doesn't already exist). Use logical assignment operators.
+
+for (let i = 0; i < books.length; i++) {
+  books[i].edition ??= 1;
+}
+console.log(books[books.length - 2].edition);
+
+//7.2
+//Some of the book objects from the books array have the highlighted property, which by default is set to true. Iterate over the books array, and if the thirdParty.goodreads.rating property is less than 4.2, reassign it with false.
+//Use the &&= operator (tip: you may also need the ! operator)
+
+for (let i = 0; i < books.length; i++) {
+  books[i].highlighted = books[i].thirdParty.goodreads.rating < 4.2 && "false";
+}
